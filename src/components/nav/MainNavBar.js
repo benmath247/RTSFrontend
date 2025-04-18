@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Navbar, Nav, Container, Spinner } from 'react-bootstrap';
 import { AuthContext } from '../../providers/AuthProvider';
 import NavbarDropdownButton from './NavBarDropdownButton';
-import LoginModal from './../modals/LoginModal'; // Import the new LoginModal component
+import LoginModal from './../modals/LoginModal';
 
 const MainNavBar = () => {
     const { user, loading, handleLoginWithGoogle, handleLogout } = useContext(AuthContext);

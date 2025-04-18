@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import useLogin from '../hooks/useLogin'; // Import the custom hook
+import useLogin from '../hooks/useLogin';
 
 const LoginForm = ({ onHide, handleLoginWithGoogle }) => {
     const [formData, setFormData] = useState({ username: '', password: '' });
-    const { login } = useLogin(); // Use the custom hook
+    const [loginSuccess, setLoginSuccess] = useState(false);
+    const { login } = useLogin();
+
+    useEffect(() => {
+        if (loginSuccess) {
+            onHide();
+        }
+    }, [loginSuccess, onHide]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -12,17 +19,13 @@ const LoginForm = ({ onHide, handleLoginWithGoogle }) => {
     };
 
     const handleLoginSubmit = async () => {
-        try {
-            const message = await login(formData); // Call the hook's login function
-            alert(message); // Display the response message
-            onHide();
-        } catch (error) {
-            alert('Login failed: ' + error.message);
-        }
+        await login(formData);
+
+        setLoginSuccess(true);
     };
 
     const handleForgotPassword = () => {
-        alert('Forgot password clicked'); // Replace with actual logic
+        alert('Forgot password clicked');
     };
 
     return (

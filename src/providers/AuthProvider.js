@@ -7,31 +7,13 @@ export const AuthContext = createContext({
     error: null,
     handleLoginWithGoogle: () => { },
     handleLogout: () => { },
+    setUser: () => { },
 });
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-
-    useEffect(() => {
-        const checkAuth = async () => {
-            try {
-                setLoading(true);
-                const response = await getUser(); // Refactored API call
-                setUser(response.data);
-                setError(null);
-            } catch (err) {
-                if (err.response?.status !== 401) {
-                    setError(err.response?.data?.detail || err.message);
-                }
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        checkAuth();
-    }, []);
 
     const handleLoginWithGoogle = () => {
         window.location.href = "http://localhost/auth/login/google-oauth2/";
@@ -59,6 +41,7 @@ const AuthProvider = ({ children }) => {
                 error,
                 handleLoginWithGoogle,
                 handleLogout,
+                setUser,
             }}
         >
             {children}
