@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Image } from 'react-bootstrap';
 import useEditProfile from '../hooks/useEditProfile';
 
 const ProfileForm = ({ formData, setFormData, isEditing, onSubmit }) => {
@@ -30,6 +30,8 @@ const ProfileForm = ({ formData, setFormData, isEditing, onSubmit }) => {
         }
     };
 
+
+
     return (
         <>
             {errors && (
@@ -42,6 +44,46 @@ const ProfileForm = ({ formData, setFormData, isEditing, onSubmit }) => {
                 </div>
             )}
             <Form onSubmit={handleSubmit}>
+
+                <div className="d-flex justify-content-center mb-3 position-relative">
+                    <Image
+                        src={formData.profile_picture instanceof File ? URL.createObjectURL(formData.profile_picture) : formData.profile_picture}
+                        roundedCircle
+                        alt="Profile Picture"
+                        style={{ width: '150px', height: '150px', objectFit: 'cover' }}
+                    />
+                    {isEditing && (
+                        <>
+                            <input
+                                type="file"
+                                id="profilePictureInput"
+                                style={{ display: 'none' }}
+                                accept="image/*"
+                                onChange={(e) => {
+                                    const file = e.target.files[0];
+                                    if (file) {
+                                        setFormData({ ...formData, profile_picture: file });
+                                    }
+                                }}
+                            />
+                            <Button
+                                variant="secondary"
+                                className="position-absolute"
+                                style={{
+                                    bottom: '-10px',
+                                    left: '50%',
+                                    transform: 'translateX(-50%)',
+                                    padding: '5px 15px',
+                                    fontSize: '14px',
+                                    borderRadius: '20px',
+                                }}
+                                onClick={() => document.getElementById('profilePictureInput').click()}
+                            >
+                                Upload Photo
+                            </Button>
+                        </>
+                    )}
+                </div>
                 <fieldset disabled={!isEditing}>
                     <Form.Group className="mb-3">
                         <Form.Label>First Name</Form.Label>

@@ -9,12 +9,11 @@ const useEditProfile = () => {
                 .find(row => row.startsWith('csrftoken='))
                 ?.split('=')[1];
 
-            const response = await axios.put('http://localhost/api/user/edit/', {
-                ...formData
-            }, {
+            const response = await axios.put('http://localhost/api/user/edit/', formData, {
                 withCredentials: true,
                 headers: {
                     'X-CSRFToken': csrfToken,
+                    'Content-Type': 'multipart/form-data',
                 },
             });
 
