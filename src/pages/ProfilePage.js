@@ -3,7 +3,7 @@ import { AuthContext } from '../providers/AuthProvider';
 import { useContext } from 'react';
 import { Container, Row, Col, Card, Image, Button } from 'react-bootstrap';
 import { FaEdit } from 'react-icons/fa';
-import ProfileForm from '../forms/ProfileForm'; // Import the new ProfileForm component
+import ProfileForm from '../forms/ProfileForm';
 
 const Profile = () => {
     const { user, loading, error } = useContext(AuthContext);

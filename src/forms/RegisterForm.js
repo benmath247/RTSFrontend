@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import useRegisterUser from '../hooks/useRegisterUser'; // Import the custom hook
+import useRegisterUser from '../hooks/useRegisterUser';
 
 const RegisterForm = ({ onHide }) => {
     const [formData, setFormData] = useState({
@@ -13,7 +13,7 @@ const RegisterForm = ({ onHide }) => {
         profile_picture: null,
     });
 
-    const registerUser = useRegisterUser(); // Use the custom hook
+    const registerUser = useRegisterUser();
 
     const handleInputChange = (e) => {
         const { name, value, files } = e.target;
@@ -25,8 +25,8 @@ const RegisterForm = ({ onHide }) => {
 
     const handleRegisterSubmit = async () => {
         try {
-            await registerUser(formData); // Call the hook function
-            alert('Registration successful'); // Replace with actual logic
+            await registerUser(formData);
+            alert('Registration successful');
             onHide();
         } catch (error) {
             alert('Registration failed: ' + (error.response?.data?.message || 'Unknown error'));

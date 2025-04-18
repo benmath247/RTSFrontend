@@ -17,7 +17,7 @@ const useStockData = () => {
         } catch (err) {
             setError(err.response?.data?.error || 'Failed to fetch stock data');
         }
-    }, []); // Memoize fetchStockData
+    }, []);
 
     return { stockPriceData, error, fetchStockData, setError };
 };

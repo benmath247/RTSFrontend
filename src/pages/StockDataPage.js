@@ -9,14 +9,14 @@ const StockData = () => {
     const { stockData, error, fetchStockData, setError } = useStockData();
     const [currentPage, setCurrentPage] = useState(1);
     const [showModal, setShowModal] = useState(false);
-    const [loading, setLoading] = useState(false); // New state for loading
+    const [loading, setLoading] = useState(false); 
     const itemsPerPage = 6;
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setError('');
         setLoading(true);
-        fetchStockData(ticker).finally(() => setLoading(false)); // Stop loading after fetch
+        fetchStockData(ticker).finally(() => setLoading(false));
         setCurrentPage(1);
     };
 

@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import { getUser, logoutUser } from "../utils/api"; // Updated import
+import { getUser, logoutUser } from "../utils/api";
 
 export const AuthContext = createContext({
     user: null,
@@ -14,6 +14,25 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const checkAuth = async () => {
+            try {
+                setLoading(true);
+                const response = await getUser();
+                setUser(response.data);
+                setError(null);
+            } catch (err) {
+                if (err.response?.status !== 401) {
+                    setError(err.response?.data?.detail || err.message);
+                }
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        checkAuth();
+    }, []);
 
     const handleLoginWithGoogle = () => {
         window.location.href = "http://localhost/auth/login/google-oauth2/";

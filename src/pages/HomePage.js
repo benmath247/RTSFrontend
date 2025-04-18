@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { useContext } from 'react';
-import { AuthContext } from '../providers/AuthProvider'; // Updated import
-import LoginModal from '../components/modals/LoginModal'; // Import the LoginModal component
+import { AuthContext } from '../providers/AuthProvider';
+import LoginModal from '../components/modals/LoginModal';
 
 const HomePage = () => {
     const { user } = useContext(AuthContext);
-    const [showLoginModal, setShowLoginModal] = useState(false); // State for modal visibility
+    const [showLoginModal, setShowLoginModal] = useState(false);
 
     const handleLoginClick = () => setShowLoginModal(true);
     const handleCloseModal = () => setShowLoginModal(false);
@@ -22,7 +22,7 @@ const HomePage = () => {
                     Please <a onClick={handleLoginClick}><u>login</u></a> to see more.
                 </p>
             )}
-            <LoginModal show={showLoginModal} onHide={handleCloseModal} /> {/* Render LoginModal */}
+            <LoginModal show={showLoginModal} onHide={handleCloseModal} />
         </Container>
     );
 };
