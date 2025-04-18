@@ -1,24 +1,34 @@
-import logo from './logo.svg';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import MainNavBar from './components/nav/MainNavBar';
+import AuthProvider from "./providers/AuthProvider";
+import SiteFooter from "./components/footer/SiteFooter";
+import HomePage from "./pages/HomePage";
+import Profile from "./pages/ProfilePage";
+import FavoriteStocksPage from "./pages/FavoriteStocksPage";
+import StockData from "./pages/StockDataPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <Router>
+        <MainNavBar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/stock-data" element={<StockData />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/favorites" element={<FavoriteStocksPage favoriteStocks={[
+            { symbol: 'AAPL', name: 'Apple Inc.', price: 150, change: 1.2, marketCap: '2.5T' },
+            { symbol: 'GOOGL', name: 'Alphabet Inc.', price: 2800, change: -0.5, marketCap: '1.8T' },
+            { symbol: 'AMZN', name: 'Amazon.com Inc.', price: 3400, change: 0.8, marketCap: '1.7T' },
+          ]
+          } />} />
+        </Routes>
+        <SiteFooter />
+      </Router>
+    </AuthProvider>
   );
 }
 

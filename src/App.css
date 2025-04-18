@@ -1,38 +1,54 @@
-.App {
-  text-align: center;
+/* App.css */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: green !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+
+div {
+  color: darkgreen !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+button {
+  background-color: darkgreen !important;
+  color: white !important;
+  /* Optional: Ensure text is readable */
+  border-color: black !important;
+  /* Optional: Ensure button has a border */
+}
+
+button:hover {
+  background-color: green !important;
+}
+
+/* implement a moving background that is a gradient of different shades of green */
+@keyframes gradient {
+  0% {
+    background-color: #155515;
+  }
+
+  25% {
+    background-color: #235623;
+  }
+
+  50% {
+    background-color: #455745;
+  }
+
+  75% {
+    background-color: #155515;
+  }
+
+  100% {
+    background-color: #155515;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body {
+  font-family: "Times New Roman", Times, serif !important;
 }
