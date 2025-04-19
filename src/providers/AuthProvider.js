@@ -35,7 +35,7 @@ const AuthProvider = ({ children }) => {
     }, []);
 
     const handleLoginWithGoogle = () => {
-        window.location.href = "http://localhost/auth/login/google-oauth2/";
+        window.location.href = process.env.REACT_APP_BACKEND + "/auth/login/google-oauth2/";
     };
 
     const handleLogout = async () => {

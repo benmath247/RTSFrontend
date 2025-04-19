@@ -12,7 +12,7 @@ const useStockData = () => {
         }
 
         try {
-            const response = await axios.get('http://localhost/api/stock-data/', { params: { ticker } });
+            const response = await axios.get(process.env.REACT_APP_BACKEND + '/api/stock-data/', { params: { ticker } });
             setStockData(response.data);
         } catch (err) {
             setError(err.response?.data?.error || 'Failed to fetch stock data');

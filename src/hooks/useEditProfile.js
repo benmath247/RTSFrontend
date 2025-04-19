@@ -9,7 +9,7 @@ const useEditProfile = () => {
                 .find(row => row.startsWith('csrftoken='))
                 ?.split('=')[1];
 
-            const response = await axios.put('http://localhost/api/user/edit/', formData, {
+            const response = await axios.put(process.env.REACT_APP_BACKEND + '/api/user/edit/', formData, {
                 withCredentials: true,
                 headers: {
                     'X-CSRFToken': csrfToken,

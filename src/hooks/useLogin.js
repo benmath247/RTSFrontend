@@ -9,14 +9,22 @@ const useLogin = () => {
     };
     const login = async (formData) => {
         try {
-            const response = await axios.post('http://localhost/api/login/', {
+            const csrfToken = document.cookie
+                .split('; ')
+                .find(row => row.startsWith('csrftoken='))
+                ?.split('=')[1];
+
+            const response = await axios.post(process.env.REACT_APP_BACKEND + '/api/login/', {
                 username: formData.username,
                 password: formData.password,
             }, {
                 withCredentials: true,
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                },
             });
 
-            const user = await axios.get('http://localhost/api/user/', { withCredentials: true });
+            const user = await axios.get(process.env.REACT_APP_BACKEND + '/api/user/', { withCredentials: true });
             console.log(user.data);
             setUserData(user.data);
 

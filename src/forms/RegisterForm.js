@@ -6,11 +6,13 @@ const RegisterForm = ({ onHide }) => {
     const [formData, setFormData] = useState({
         username: '',
         password: '',
+        password_confirm: '',
         first_name: '',
         last_name: '',
         bio: '',
         birth_date: '',
         profile_picture: null,
+        email: '', // Added email field
     });
 
     const registerUser = useRegisterUser();
@@ -24,8 +26,18 @@ const RegisterForm = ({ onHide }) => {
     };
 
     const handleRegisterSubmit = async () => {
+        if (formData.password !== formData.password_confirm) {
+            alert('Passwords do not match.');
+            return;
+        }
+
+        const formattedFormData = {
+            ...formData,
+            birth_date: formData.birth_date ? formData.birth_date.replace(/-/g, '/') : '',
+        };
+
         try {
-            await registerUser(formData);
+            await registerUser(formattedFormData);
             alert('Registration successful');
             onHide();
         } catch (error) {
@@ -47,6 +59,17 @@ const RegisterForm = ({ onHide }) => {
                 />
             </Form.Group>
             <Form.Group className="mb-3">
+                <Form.Label style={{ fontWeight: '500' }}>Email</Form.Label>
+                <Form.Control
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="Enter email"
+                    style={{ borderRadius: '6px', padding: '0.5rem' }}
+                />
+            </Form.Group>
+            <Form.Group className="mb-3">
                 <Form.Label style={{ fontWeight: '500' }}>Password</Form.Label>
                 <Form.Control
                     type="password"
@@ -54,6 +77,17 @@ const RegisterForm = ({ onHide }) => {
                     value={formData.password}
                     onChange={handleInputChange}
                     placeholder="Enter password"
+                    style={{ borderRadius: '6px', padding: '0.5rem' }}
+                />
+            </Form.Group>
+            <Form.Group className="mb-3">
+                <Form.Label style={{ fontWeight: '500' }}>Confirm Password</Form.Label>
+                <Form.Control
+                    type="password"
+                    name="password_confirm"
+                    value={formData.password_confirm}
+                    onChange={handleInputChange}
+                    placeholder="Confirm password"
                     style={{ borderRadius: '6px', padding: '0.5rem' }}
                 />
             </Form.Group>

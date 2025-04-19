@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const fetchUserData = async () => {
-    const response = await axios.get('http://localhost/api/user/');
+    const response = await axios.get(process.env.REACT_APP_BACKEND + '/api/user/');
     return response.data;
 };
 
@@ -13,7 +13,7 @@ export const updateUserProfile = async (formData) => {
         }
     });
 
-    const response = await axios.patch('http://localhost/api/user/edit/', data, {
+    const response = await axios.patch(process.env.REACT_APP_BACKEND + '/api/user/edit/', data, {
         headers: { 'Content-Type': 'multipart/form-data' },
     });
     return response.data;

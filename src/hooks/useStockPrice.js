@@ -10,9 +10,9 @@ const useStockData = () => {
             setError('Ticker is required');
             return;
         }
-
+        // get REACT_APP_BACKEND from .env
         try {
-            const response = await axios.get('http://localhost/api/stock-price/', { params: { ticker } });
+            const response = await axios.get(process.env.REACT_APP_BACKEND + '/api/stock-price/', { params: { ticker } });
             setStockPriceData(response.data);
         } catch (err) {
             setError(err.response?.data?.error || 'Failed to fetch stock data');

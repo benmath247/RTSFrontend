@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export const getUser = async () => {
-    
-    return await axios.get("http://localhost/api/user/", {
+
+    return await axios.get(process.env.REACT_APP_BACKEND + "/api/user/", {
         withCredentials: true,
     });
 };
@@ -18,7 +18,7 @@ export const logoutUser = async () => {
 
     const csrfToken = getCsrfToken();
     return await axios.post(
-        "http://localhost/api/logout/",
+        process.env.REACT_APP_BACKEND + "/api/logout/",
         {},
         {
             headers: {
