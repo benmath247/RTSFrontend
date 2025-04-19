@@ -39,15 +39,6 @@ const ProfileForm = ({ formData, setFormData, isEditing, onSubmit }) => {
 
     return (
         <>
-            {/* {errors && (
-                <div className="alert alert-danger">
-                    {Object.entries(errors).map(([field, messages]) => (
-                        <div key={field}>
-                            <strong>{field}:</strong> {messages.join(', ')}
-                        </div>
-                    ))}
-                </div>
-            )} */}
             <Form onSubmit={handleSubmit}>
 
                 <div className="d-flex justify-content-center mb-3 position-relative">

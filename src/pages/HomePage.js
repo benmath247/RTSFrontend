@@ -8,11 +8,18 @@ import { toast } from "react-toastify";
 const HomePage = () => {
     const { user } = useContext(AuthContext);
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const [initialForm, setInitialForm] = useState('login');
 
     const handleLoginClick = () => {
+        setInitialForm('login');
         setShowLoginModal(true);
-        toast.success("Welcome to the Home Page!");
     };
+
+    const handleRegisterClick = () => {
+        setInitialForm('register');
+        setShowLoginModal(true);
+    };
+
     const handleCloseModal = () => setShowLoginModal(false);
 
     return (
@@ -23,10 +30,10 @@ const HomePage = () => {
                 <>You are logged in</>
             ) : (
                 <p>
-                    Please <a onClick={handleLoginClick}><u>login</u></a> to see more.
+                    Please <a onClick={handleLoginClick}><u>login</u></a> or <a onClick={handleRegisterClick}><u>register</u></a> to see more.
                 </p>
             )}
-            <LoginModal show={showLoginModal} onHide={handleCloseModal} />
+            <LoginModal show={showLoginModal} onHide={handleCloseModal} initialForm={initialForm} />
         </Container>
     );
 };

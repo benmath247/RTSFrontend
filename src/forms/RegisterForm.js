@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { toast } from 'react-toastify'; // Import toast
+import 'react-toastify/dist/ReactToastify.css'; // Import toastify styles
 import useRegisterUser from '../hooks/useRegisterUser';
 
 const RegisterForm = ({ onHide }) => {
@@ -27,7 +29,7 @@ const RegisterForm = ({ onHide }) => {
 
     const handleRegisterSubmit = async () => {
         if (formData.password !== formData.password_confirm) {
-            alert('Passwords do not match.');
+            toast.error('Passwords do not match.'); // Replace alert with toast
             return;
         }
 
@@ -38,10 +40,10 @@ const RegisterForm = ({ onHide }) => {
 
         try {
             await registerUser(formattedFormData);
-            alert('Registration successful');
-            onHide();
+            toast.success('Registration successful'); // Replace alert with toast
+            onHide(); // Switch to login form
         } catch (error) {
-            alert('Registration failed: ' + (error.response?.data?.message || 'Unknown error'));
+            toast.error('Registration failed: ' + (error.response?.data?.message || 'Unknown error')); // Replace alert with toast
         }
     };
 

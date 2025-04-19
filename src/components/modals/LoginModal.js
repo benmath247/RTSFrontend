@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Button, ButtonGroup } from 'react-bootstrap';
 import LoginForm from '../../forms/LoginForm';
 import RegisterForm from '../../forms/RegisterForm';
 
-const LoginModal = ({ show, onHide, handleLoginWithGoogle }) => {
-    const [isLogin, setIsLogin] = useState(true);
+const LoginModal = ({ show, onHide, handleLoginWithGoogle, initialForm = 'login' }) => {
+    const [isLogin, setIsLogin] = useState(initialForm === 'login');
+
+    useEffect(() => {
+        setIsLogin(initialForm === 'login');
+    }, [initialForm]);
+
+    const handleSwitchToLogin = () => {
+        setIsLogin(true);
+    };
 
     return (
         <Modal show={show} onHide={onHide} centered style={{ padding: '1rem' }}>
@@ -31,7 +39,7 @@ const LoginModal = ({ show, onHide, handleLoginWithGoogle }) => {
                 {isLogin ? (
                     <LoginForm onHide={onHide} handleLoginWithGoogle={handleLoginWithGoogle} />
                 ) : (
-                    <RegisterForm onHide={onHide} />
+                    <RegisterForm onHide={handleSwitchToLogin} />
                 )}
             </Modal.Body>
         </Modal>

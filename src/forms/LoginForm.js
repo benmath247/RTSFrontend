@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import useLogin from '../hooks/useLogin';
 
 const LoginForm = ({ onHide, handleLoginWithGoogle }) => {
@@ -9,6 +11,7 @@ const LoginForm = ({ onHide, handleLoginWithGoogle }) => {
 
     useEffect(() => {
         if (loginSuccess) {
+            toast.success('Login successful!');
             onHide();
         }
     }, [loginSuccess, onHide]);
@@ -24,9 +27,6 @@ const LoginForm = ({ onHide, handleLoginWithGoogle }) => {
         setLoginSuccess(true);
     };
 
-    const handleForgotPassword = () => {
-        alert('Forgot password clicked');
-    };
 
     return (
         <div>
@@ -60,30 +60,19 @@ const LoginForm = ({ onHide, handleLoginWithGoogle }) => {
                         style={{ borderRadius: '6px', padding: '0.5rem' }}
                     />
                 </Form.Group>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Button
-                        variant="primary"
-                        onClick={handleLoginSubmit}
-                        style={{
-                            borderRadius: '6px',
-                            padding: '0.5rem 1rem',
-                            fontWeight: '500',
-                        }}
-                    >
-                        Submit
-                    </Button>
-                    <Button
-                        variant="link"
-                        onClick={handleForgotPassword}
-                        style={{
-                            color: '#007bff',
-                            textDecoration: 'none',
-                            fontSize: '0.9rem',
-                        }}
-                    >
-                        Forgot Password?
-                    </Button>
-                </div>
+
+                <Button
+                    variant="primary"
+                    onClick={handleLoginSubmit}
+                    style={{
+                        borderRadius: '6px',
+                        padding: '0.5rem 1rem',
+                        fontWeight: '500',
+                        float: 'right',
+                    }}
+                >
+                    Submit
+                </Button>
             </Form>
         </div>
     );
