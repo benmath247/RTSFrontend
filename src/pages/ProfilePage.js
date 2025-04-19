@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
 import { useContext } from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
-import { FaEdit } from 'react-icons/fa';
+import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import ProfileForm from '../forms/ProfileForm';
 
 const Profile = () => {
@@ -54,11 +53,13 @@ const Profile = () => {
                     <Card>
                         <Card.Body>
                             <div className="d-flex justify-content-between align-items-center">
-                                <h2>Profile</h2>
-                                <FaEdit
+                                <h2>{isEditing ? <>Edit Profile</> : <>Profile </>}</h2>
+                                <Button
                                     style={{ cursor: 'pointer' }}
                                     onClick={handleEditToggle}
-                                />
+                                >
+                                    {isEditing ? <>Cancel</> : <>Edit </>}
+                                </Button>
                             </div>
 
                             <ProfileForm
@@ -71,7 +72,7 @@ const Profile = () => {
                     </Card>
                 </Col>
             </Row>
-        </Container>
+        </Container >
     );
 };
 
