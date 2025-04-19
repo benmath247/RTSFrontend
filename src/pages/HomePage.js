@@ -3,12 +3,16 @@ import { Container } from 'react-bootstrap';
 import { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
 import LoginModal from '../components/modals/LoginModal';
+import { toast } from "react-toastify";
 
 const HomePage = () => {
     const { user } = useContext(AuthContext);
     const [showLoginModal, setShowLoginModal] = useState(false);
 
-    const handleLoginClick = () => setShowLoginModal(true);
+    const handleLoginClick = () => {
+        setShowLoginModal(true);
+        toast.success("Welcome to the Home Page!");
+    };
     const handleCloseModal = () => setShowLoginModal(false);
 
     return (

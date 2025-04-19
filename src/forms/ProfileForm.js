@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Form, Button, Image } from 'react-bootstrap';
+import { Form, Button, Image, Toast } from 'react-bootstrap';
+import { toast } from 'react-toastify'; // Import toast
 import useEditProfile from '../hooks/useEditProfile';
 
 const ProfileForm = ({ formData, setFormData, isEditing, onSubmit }) => {
     const { editProfile } = useEditProfile();
-    const [errors, setErrors] = useState(null);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -14,27 +14,32 @@ const ProfileForm = ({ formData, setFormData, isEditing, onSubmit }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const updatedFormData = { ...formData };
+
         if (updatedFormData.birth_date === "") {
             delete updatedFormData.birth_date;
         }
+
+        // Remove profile_picture if it's not a file
+        if (!(updatedFormData.profile_picture instanceof File)) {
+            delete updatedFormData.profile_picture;
+        }
+
         try {
             const result = await editProfile(updatedFormData);
             if (result.errors) {
-                setErrors(result.errors);
+                toast.error(result.errors); // Show toast on error
             } else {
-                setErrors(null);
                 onSubmit(updatedFormData);
+                toast.success("Profile updated successfully!"); // Show success toast
             }
         } catch (error) {
-            console.error("Error updating profile:", error.message);
+            toast.error("An unexpected error occurred. Please try again.");
         }
     };
 
-
-
     return (
         <>
-            {errors && (
+            {/* {errors && (
                 <div className="alert alert-danger">
                     {Object.entries(errors).map(([field, messages]) => (
                         <div key={field}>
@@ -42,7 +47,7 @@ const ProfileForm = ({ formData, setFormData, isEditing, onSubmit }) => {
                         </div>
                     ))}
                 </div>
-            )}
+            )} */}
             <Form onSubmit={handleSubmit}>
 
                 <div className="d-flex justify-content-center mb-3 position-relative">
@@ -141,9 +146,19 @@ const ProfileForm = ({ formData, setFormData, isEditing, onSubmit }) => {
                     </Form.Group>
                 </fieldset>
                 {isEditing && (
-                    <Button variant="primary" type="submit">
-                        Save Changes
-                    </Button>
+                    <div className="d-flex justify-content-between">
+                        <Button variant="primary" type="submit">
+                            Save Changes
+                        </Button>
+                        <Button
+                            variant="secondary"
+                            onClick={() => {
+                                setFormData({ ...formData }); // Reset form data if needed
+                            }}
+                        >
+                            Cancel
+                        </Button>
+                    </div>
                 )}
             </Form>
         </>

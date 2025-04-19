@@ -9,12 +9,18 @@ const useEditProfile = () => {
                 .find(row => row.startsWith('csrftoken='))
                 ?.split('=')[1];
 
+            const headers = {
+                'X-CSRFToken': csrfToken,
+            };
+
+            // Set Content-Type only if formData contains a file
+            if (formData.profile_picture instanceof File) {
+                headers['Content-Type'] = 'multipart/form-data';
+            }
+
             const response = await axios.put(process.env.REACT_APP_BACKEND + '/api/user/edit/', formData, {
                 withCredentials: true,
-                headers: {
-                    'X-CSRFToken': csrfToken,
-                    'Content-Type': 'multipart/form-data',
-                },
+                headers,
             });
 
             return response.data;
