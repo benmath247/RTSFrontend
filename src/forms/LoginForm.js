@@ -11,7 +11,6 @@ const LoginForm = ({ onHide, handleLoginWithGoogle }) => {
 
     useEffect(() => {
         if (loginSuccess) {
-            toast.success('Login successful!');
             onHide();
         }
     }, [loginSuccess, onHide]);
