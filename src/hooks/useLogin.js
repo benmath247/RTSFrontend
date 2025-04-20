@@ -32,7 +32,6 @@ const useLogin = () => {
         process.env.REACT_APP_BACKEND + "/api/user/",
         { withCredentials: true },
       );
-      console.log(user.data);
       setUserData(user.data);
 
       return response.data;
