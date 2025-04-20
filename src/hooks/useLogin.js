@@ -1,6 +1,7 @@
 import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
 import { useContext } from "react";
+import { toast } from "react-toastify";
 
 const useLogin = () => {
   const { setUser } = useContext(AuthContext);
@@ -33,9 +34,9 @@ const useLogin = () => {
         { withCredentials: true },
       );
       setUserData(user.data);
-
       return response.data;
     } catch (error) {
+      toast.error(error.response?.data?.message || "An error occurred");
       throw new Error(error.response?.data?.message || error);
     }
   };
