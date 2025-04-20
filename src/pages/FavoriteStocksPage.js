@@ -31,7 +31,11 @@ function FavoriteStocksPage() {
 
   const fetchFavoriteStocks = async () => {
     const response = await listFavoriteStocks();
-    setStocks(response.results);
+    if (response && response.results) {
+      setStocks(response.results);
+    } else {
+      setStocks([]);
+    }
   };
 
   useEffect(() => {
