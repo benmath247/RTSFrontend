@@ -43,7 +43,12 @@ const Profile = () => {
 
   const handleSubmit = (updatedData) => {
     console.log("Submitting updated profile data:", updatedData);
-    // TODO: Send updatedData to the backend via an API call
+    setFormData(updatedData);
+    // send a request to the backend to update the profile
+
+
+
+
     setIsEditing(false);
   };
 

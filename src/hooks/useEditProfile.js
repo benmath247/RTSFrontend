@@ -12,7 +12,6 @@ const useEditProfile = () => {
         "X-CSRFToken": csrfToken,
       };
 
-      // Set Content-Type only if formData contains a file
       if (formData.profile_picture instanceof File) {
         headers["Content-Type"] = "multipart/form-data";
       }

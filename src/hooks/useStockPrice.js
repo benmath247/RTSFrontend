@@ -10,7 +10,6 @@ const useStockData = () => {
       setError("Ticker is required");
       return;
     }
-    // get REACT_APP_BACKEND from .env
     try {
       const response = await axios.get(
         process.env.REACT_APP_BACKEND + "/api/stock-price/",

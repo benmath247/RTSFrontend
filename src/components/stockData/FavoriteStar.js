@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import useToggleFavoriteStock from '../../hooks/useToggleFavoriteStock';
-import { FaRegStar, FaStar } from 'react-icons/fa'; // Using react-icons for star icons
+import { FaRegStar, FaStar } from 'react-icons/fa'
 const FavoriteStar = ({ ticker, isFavorite }) => {
-    const [isFavoriteState, setIsFavoriteState] = useState(isFavorite); // Local state to manage favorite status
+    const [isFavoriteState, setIsFavoriteState] = useState(isFavorite);
     const favoriteStock = useToggleFavoriteStock(isFavoriteState, setIsFavoriteState, ticker);
-
+    console.log(ticker, ': ', isFavorite)
     const handleClick = () => {
         favoriteStock()
 

@@ -3,10 +3,10 @@ import useListFavoriteStock from "../hooks/useListFavoriteStock";
 
 function FavoriteStocksPage() {
   const [stocks, setStocks] = useState([]);
-  const listFavoriteStocks = useListFavoriteStock(); // Call the hook at the top level
+  const listFavoriteStocks = useListFavoriteStock();
 
   const fetchFavoriteStocks = async () => {
-    const response = await listFavoriteStocks(); // Use the returned function here
+    const response = await listFavoriteStocks();
     setStocks(response.results);
   };
 
@@ -17,7 +17,7 @@ function FavoriteStocksPage() {
   return (
     <div className="container mt-4">
       <h1>Favorite Stocks</h1>
-      {stocks.length > 0 ? ( // Use the `stocks` state here
+      {stocks.length > 0 ? (
         <table className="table table-striped">
           <thead>
             <tr>
@@ -25,7 +25,7 @@ function FavoriteStocksPage() {
             </tr>
           </thead>
           <tbody>
-            {stocks.map((stock, index) => ( // Use `stocks` instead of `favoriteStocks`
+            {stocks.map((stock, index) => (
               <tr key={index}>
                 <td>{stock.stock_symbol}</td>
               </tr>
