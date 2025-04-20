@@ -5,9 +5,8 @@ export const AuthContext = createContext({
   user: null,
   loading: false,
   error: null,
-  handleLoginWithGoogle: () => {},
-  handleLogout: () => {},
-  setUser: () => {},
+  handleLogout: () => { },
+  setUser: () => { },
 });
 
 const AuthProvider = ({ children }) => {
@@ -34,11 +33,6 @@ const AuthProvider = ({ children }) => {
     checkAuth();
   }, []);
 
-  const handleLoginWithGoogle = () => {
-    window.location.href =
-      process.env.REACT_APP_BACKEND + "/auth/login/google-oauth2/";
-  };
-
   const handleLogout = async () => {
     try {
       setLoading(true);
@@ -59,7 +53,6 @@ const AuthProvider = ({ children }) => {
         user,
         loading,
         error,
-        handleLoginWithGoogle,
         handleLogout,
         setUser,
       }}

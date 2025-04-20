@@ -1,26 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import useListFavoriteStock from "../hooks/useListFavoriteStock";
 
-function FavoriteStocksPage({ favoriteStocks }) {
+function FavoriteStocksPage() {
+  const [stocks, setStocks] = useState([]);
+  const listFavoriteStocks = useListFavoriteStock(); // Call the hook at the top level
+
+  const fetchFavoriteStocks = async () => {
+    const response = await listFavoriteStocks(); // Use the returned function here
+    setStocks(response.results);
+  };
+
+  useEffect(() => {
+    fetchFavoriteStocks();
+  }, []);
+  console.log(stocks)
   return (
     <div className="container mt-4">
       <h1>Favorite Stocks</h1>
-      {favoriteStocks.length > 0 ? (
+      {stocks.length > 0 ? ( // Use the `stocks` state here
         <table className="table table-striped">
           <thead>
             <tr>
               <th>Symbol</th>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Change (%)</th>
             </tr>
           </thead>
           <tbody>
-            {favoriteStocks.map((stock, index) => (
+            {stocks.map((stock, index) => ( // Use `stocks` instead of `favoriteStocks`
               <tr key={index}>
-                <td>{stock.symbol}</td>
-                <td>{stock.name}</td>
-                <td>${stock.price.toFixed(2)}</td>
-                <td>{stock.change.toFixed(2)}%</td>
+                <td>{stock.stock_symbol}</td>
               </tr>
             ))}
           </tbody>
@@ -31,31 +38,5 @@ function FavoriteStocksPage({ favoriteStocks }) {
     </div>
   );
 }
-
-FavoriteStocksPage.defaultProps = {
-  favoriteStocks: [
-    {
-      symbol: "AAPL",
-      name: "Apple Inc.",
-      price: 150,
-      change: 1.2,
-      marketCap: "2.5T",
-    },
-    {
-      symbol: "GOOGL",
-      name: "Alphabet Inc.",
-      price: 2800,
-      change: -0.5,
-      marketCap: "1.8T",
-    },
-    {
-      symbol: "AMZN",
-      name: "Amazon.com Inc.",
-      price: 3400,
-      change: 0.8,
-      marketCap: "1.7T",
-    },
-  ],
-};
 
 export default FavoriteStocksPage;
