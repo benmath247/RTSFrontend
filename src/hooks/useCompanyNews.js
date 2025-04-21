@@ -5,7 +5,6 @@ const useCompanyNews = (symbol) => {
     const [newsData, setNewsData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    console.log(symbol)
 
     useEffect(() => {
         if (!symbol) return;
