@@ -37,7 +37,6 @@ const useLogin = () => {
       return response.data;
     } catch (error) {
       toast.error(error.response?.data?.message || "An error occurred");
-      throw new Error(error.response?.data?.message || error);
     }
   };
 
