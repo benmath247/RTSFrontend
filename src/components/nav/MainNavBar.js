@@ -22,14 +22,14 @@ const MainNavBar = () => {
                     <Nav className="align-items-center">
                         {user && (
                             <>
-                                <Nav.Link href="/stock-data" className="mx-2">
-                                    Search Stocks
+                                <Nav.Link href="/stocks" className="mx-2">
+                                    Search
                                 </Nav.Link>
                                 <Nav.Link href="/favorites" className="mx-2">
                                     Favorites
                                 </Nav.Link>
                                 <Nav.Link href="/profile" className="mx-2">
-                                    View Profile
+                                    Profile
                                 </Nav.Link>
                             </>
                         )}

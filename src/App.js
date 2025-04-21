@@ -20,7 +20,7 @@ function App() {
           <MainNavBar />
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/stock-data" element={<StockData />} />
+            <Route path="/stocks" element={<StockData />} />
             <Route path="/profile" element={<Profile />} />
             <Route
               path="/favorites"
