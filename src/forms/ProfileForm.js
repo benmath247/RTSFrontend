@@ -14,7 +14,7 @@ const ProfileForm = ({ formData, setFormData, isEditing, onSubmit }) => {
         let formattedValue = value;
 
         if (name === "birth_date") {
-            formattedValue = value.replace(/-/g, "/");
+            formattedValue = value; // Keep the value as is for input compatibility
         }
 
         setFormData({ ...formData, [name]: formattedValue });
@@ -23,6 +23,10 @@ const ProfileForm = ({ formData, setFormData, isEditing, onSubmit }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const updatedFormData = { ...formData };
+
+        if (updatedFormData.birth_date) {
+            updatedFormData.birth_date = updatedFormData.birth_date.split("-").join("/");
+        }
 
         if (updatedFormData.birth_date === "") {
             delete updatedFormData.birth_date;
@@ -152,7 +156,7 @@ const ProfileForm = ({ formData, setFormData, isEditing, onSubmit }) => {
                         <Form.Control
                             type="date"
                             name="birth_date"
-                            value={formData.birth_date}
+                            value={formData.birth_date ? formData.birth_date.split("/").join("-") : ""}
                             onChange={handleInputChange}
                         />
                     </Form.Group>
