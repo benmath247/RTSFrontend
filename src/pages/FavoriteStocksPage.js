@@ -56,7 +56,7 @@ function FavoriteStocksPage() {
           ))}
         </Accordion>
       ) : (
-        <p>No favorite stocks found.</p>
+        <p>No favorite stocks found. Add more stocks <a href="stock-data">here</a></p>
       )}
     </div>
   );

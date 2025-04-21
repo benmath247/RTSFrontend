@@ -6,48 +6,58 @@ import LoginModal from "../components/modals/LoginModal";
 import { toast } from "react-toastify";
 
 const HomePage = () => {
-  const { user } = useContext(AuthContext);
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [initialForm, setInitialForm] = useState("login");
+    const { user } = useContext(AuthContext);
+    const [showLoginModal, setShowLoginModal] = useState(false);
+    const [initialForm, setInitialForm] = useState("login");
 
-  const handleLoginClick = () => {
-    setInitialForm("login");
-    setShowLoginModal(true);
-  };
+    const handleLoginClick = () => {
+        setInitialForm("login");
+        setShowLoginModal(true);
+    };
 
-  const handleRegisterClick = () => {
-    setInitialForm("register");
-    setShowLoginModal(true);
-  };
+    const handleRegisterClick = () => {
+        setInitialForm("register");
+        setShowLoginModal(true);
+    };
 
-  const handleCloseModal = () => setShowLoginModal(false);
+    const handleCloseModal = () => setShowLoginModal(false);
 
-  return (
-    <Container className="mt-4">
-      <h1>Welcome, RTS Labs!</h1>
-      <p>I hope you enjoy the application!</p>
-      {user ? (
-        <>You are logged in</>
-      ) : (
-        <p>
-          Please{" "}
-          <a onClick={handleLoginClick}>
-            <u>login</u>
-          </a>{" "}
-          or{" "}
-          <a onClick={handleRegisterClick}>
-            <u>register</u>
-          </a>{" "}
-          to see more.
-        </p>
-      )}
-      <LoginModal
-        show={showLoginModal}
-        onHide={handleCloseModal}
-        initialForm={initialForm}
-      />
-    </Container>
-  );
+    return (
+        <Container className="mt-4">
+            <h1>Welcome, RTS Labs!</h1>
+            <p>I hope you enjoy the application!</p>
+            {user ? (
+                <section>
+
+                    <h2>You are logged in</h2>
+                    <p>You can:</p>
+                    <ul>
+                        <li>View and edit your <a href="/profile">profile</a></li>
+                        <li><a href="/stock-data">Search for stocks.</a> Star your favorite ones to see them in the <a href="/favorite-stocks">Favorite Stocks</a> page. </li>
+                        <li>In the favorites page, click into each favorite to see more detailed stock data.</li>
+
+                    </ul>
+                </section>
+            ) : (
+                <p>
+                    Please{" "}
+                    <a onClick={handleLoginClick}>
+                        <u>login</u>
+                    </a>{" "}
+                    or{" "}
+                    <a onClick={handleRegisterClick}>
+                        <u>register</u>
+                    </a>{" "}
+                    to see more.
+                </p>
+            )}
+            <LoginModal
+                show={showLoginModal}
+                onHide={handleCloseModal}
+                initialForm={initialForm}
+            />
+        </Container>
+    );
 };
 
 export default HomePage;
