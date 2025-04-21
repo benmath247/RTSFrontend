@@ -33,7 +33,7 @@ const HomePage = () => {
                     <p>You can:</p>
                     <ul>
                         <li>View and edit your <a href="/profile">profile</a></li>
-                        <li><a href="/stocks">Search for stocks.</a></li>
+                        <li><a href="/stocks">Search</a> for stocks.</li>
                         <li>Star your favorite ones to see them in the <a href="/favorites">favorites</a> page. </li>
                         <li>Click into each favorite to see more details, recent news, and stock analysts recommendations.</li>
 
