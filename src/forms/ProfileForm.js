@@ -56,17 +56,22 @@ const ProfileForm = ({ formData, setFormData, isEditing, onSubmit }) => {
                 : formData.profile_picture;
 
         if (!pic) {
+            if (!user.profilePic) {
+                return "https://cdn11.bigcommerce.com/s-dl22izwaan/images/stencil/1280w/products/677/22372/42_1K__76704.1633021257.jpg?c=1"
+            }
             return user.profile_picture;
         }
         return pic;
     }
+
+    const profilePic = getProfilePicture()
 
     return (
         <>
             <Form onSubmit={handleSubmit}>
                 <div className="d-flex justify-content-center mb-3 position-relative">
                     <Image
-                        src={getProfilePicture()}
+                        src={profilePic}
                         roundedCircle
                         alt="Profile Picture"
                         style={{ width: "150px", height: "150px", objectFit: "cover" }}
