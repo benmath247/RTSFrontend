@@ -4,9 +4,12 @@ import useListFavoriteStock from "../hooks/useListFavoriteStock";
 import StockProfileTable from "../components/StockProfileTable";
 import fetchStockProfile from "../hooks/useStockProfile"; // Renamed for clarity
 import StockNewsAccordion from "../components/StockNewsAccordion"; // Ensure this is a default import
+import StockBarGraph from "../components/StockBarGraph"; // Import the new component
+import useRecommendationTrends from "../hooks/useRecommendationTrends"; // Import the new hook
 
 function FavoriteStockItem({ stock, eventKey }) {
   const [itemData, setItemData] = useState(null);
+  const { recommendationData, loading, error } = useRecommendationTrends(stock.stock_symbol);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,6 +26,16 @@ function FavoriteStockItem({ stock, eventKey }) {
         <div className="d-flex flex-column flex-lg-row justify-content-between">
           <div className="flex-grow-1 me-lg-3">
             <StockProfileTable stockProfileData={itemData || {}} />
+            <div className="mt-4">
+              <h3>Recommendation Trends</h3>
+              {loading ? (
+                <p>Loading...</p>
+              ) : error ? (
+                <p>Error: {error}</p>
+              ) : (
+                <StockBarGraph data={recommendationData} />
+              )}
+            </div>
           </div>
           <div className="flex-grow-1 d-flex flex-column" style={{ minWidth: "0" }}>
             <h3>News About {stock.stock_symbol}</h3>
