@@ -3,6 +3,7 @@ import { Accordion } from "react-bootstrap";
 import useListFavoriteStock from "../hooks/useListFavoriteStock";
 import StockProfileTable from "../components/StockProfileTable";
 import fetchStockProfile from "../hooks/useStockProfile"; // Renamed for clarity
+import StockNewsAccordion from "../components/StockNewsAccordion"; // Ensure this is a default import
 
 function FavoriteStockItem({ stock, eventKey }) {
   const [itemData, setItemData] = useState(null);
@@ -20,6 +21,9 @@ function FavoriteStockItem({ stock, eventKey }) {
       <Accordion.Header>{stock.stock_symbol}</Accordion.Header>
       <Accordion.Body>
         <StockProfileTable stockProfileData={itemData || {}} />
+        <h3>News About {stock.stock_symbol}</h3>
+
+        <StockNewsAccordion symbol={stock.stock_symbol} />
       </Accordion.Body>
     </Accordion.Item>
   );
