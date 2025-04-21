@@ -20,10 +20,17 @@ function FavoriteStockItem({ stock, eventKey }) {
     <Accordion.Item eventKey={eventKey}>
       <Accordion.Header>{stock.stock_symbol}</Accordion.Header>
       <Accordion.Body>
-        <StockProfileTable stockProfileData={itemData || {}} />
-        <h3>News About {stock.stock_symbol}</h3>
-
-        <StockNewsAccordion symbol={stock.stock_symbol} />
+        <div className="d-flex flex-column flex-lg-row justify-content-between">
+          <div className="flex-grow-1 me-lg-3">
+            <StockProfileTable stockProfileData={itemData || {}} />
+          </div>
+          <div className="flex-grow-1 d-flex flex-column" style={{ minWidth: "0" }}>
+            <h3>News About {stock.stock_symbol}</h3>
+            <div className="flex-grow-1 overflow-auto">
+              <StockNewsAccordion symbol={stock.stock_symbol} />
+            </div>
+          </div>
+        </div>
       </Accordion.Body>
     </Accordion.Item>
   );

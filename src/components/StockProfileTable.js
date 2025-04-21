@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Card, Image } from "react-bootstrap";
+import { Table, Card, Image, Row, Col } from "react-bootstrap";
 
 const StockProfileTable = ({ stockProfileData }) => {
     if (!stockProfileData) {
@@ -30,10 +30,21 @@ const StockProfileTable = ({ stockProfileData }) => {
     return (
         <Card className="m-3 p-3">
             <Card.Body>
-                <Card.Title>
-                    {name} ({stockTicker})
-                </Card.Title>
-                <Image src={logo} alt={`${name} logo`} height="50" className="mb-3" />
+                <Row className="align-items-center mb-3">
+                    <Col xs="auto">
+                        <Image
+                            src={logo}
+                            alt={`${name} logo`}
+                            height="50"
+                            className="me-3"
+                        />
+                    </Col>
+                    <Col>
+                        <Card.Title className="mb-0">
+                            {name} ({stockTicker})
+                        </Card.Title>
+                    </Col>
+                </Row>
                 <Card.Text>{description}</Card.Text>
                 <div className="table-responsive">
                     <Table striped bordered hover>
