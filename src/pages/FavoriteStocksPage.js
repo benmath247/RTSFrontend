@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Accordion } from "react-bootstrap";
+import { Accordion, Tabs, Tab } from "react-bootstrap"; // Import Tabs and Tab components
 import useListFavoriteStock from "../hooks/useListFavoriteStock";
 import StockProfileTable from "../components/StockProfileTable";
 import fetchStockProfile from "../hooks/useStockProfile"; // Renamed for clarity
 import StockNewsAccordion from "../components/StockNewsAccordion"; // Ensure this is a default import
 import StockBarGraph from "../components/StockBarGraph"; // Import the new component
 import useRecommendationTrends from "../hooks/useRecommendationTrends"; // Import the new hook
+import EarningsSurpriseGraph from "../components/EarningsSurpriseGraph"; // Import the new component
+import useEarningsSurprises from "../hooks/useEarningsSurprises"; // Import the new hook
 
 function FavoriteStockItem({ stock, eventKey }) {
   const [itemData, setItemData] = useState(null);
   const { recommendationData, loading, error } = useRecommendationTrends(stock.stock_symbol);
+  const { earningsData, loading: earningsLoading, error: earningsError } = useEarningsSurprises(stock.stock_symbol);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,14 +30,26 @@ function FavoriteStockItem({ stock, eventKey }) {
           <div className="flex-grow-1 me-lg-3">
             <StockProfileTable stockProfileData={itemData || {}} />
             <div className="mt-4">
-              <h3>Recommendation Trends</h3>
-              {loading ? (
-                <p>Loading...</p>
-              ) : error ? (
-                <p>Error: {error}</p>
-              ) : (
-                <StockBarGraph data={recommendationData} />
-              )}
+              <Tabs defaultActiveKey="recommendations" id={`tabs-${stock.stock_symbol}`}>
+                <Tab eventKey="recommendations" title="Recommendation Trends">
+                  {loading ? (
+                    <p>Loading...</p>
+                  ) : error ? (
+                    <p>Error: {error}</p>
+                  ) : (
+                    <StockBarGraph data={recommendationData} />
+                  )}
+                </Tab>
+                <Tab eventKey="earnings" title="Earnings Surprises">
+                  {earningsLoading ? (
+                    <p>Loading...</p>
+                  ) : earningsError ? (
+                    <p>Error: {earningsError}</p>
+                  ) : (
+                    <EarningsSurpriseGraph data={earningsData} />
+                  )}
+                </Tab>
+              </Tabs>
             </div>
           </div>
           <div className="flex-grow-1 d-flex flex-column" style={{ minWidth: "0" }}>
