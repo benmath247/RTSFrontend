@@ -47,6 +47,9 @@ const StockNewsAccordion = ({ symbol }) => {
 
     const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
+    // Limit the pagination to the first 10 pages
+    const visiblePages = Array.from({ length: Math.min(10, totalPages) }, (_, i) => i + 1);
+
     return (
         <div>
             <Tabs
@@ -71,13 +74,13 @@ const StockNewsAccordion = ({ symbol }) => {
                             ))}
                         </Row>
                         <Pagination className="mt-3">
-                            {[...Array(totalPages).keys()].map((page) => (
+                            {visiblePages.map((page) => (
                                 <Pagination.Item
-                                    key={page + 1}
-                                    active={page + 1 === currentPage}
-                                    onClick={() => handlePageChange(page + 1)}
+                                    key={page}
+                                    active={page === currentPage}
+                                    onClick={() => handlePageChange(page)}
                                 >
-                                    {page + 1}
+                                    {page}
                                 </Pagination.Item>
                             ))}
                         </Pagination>
